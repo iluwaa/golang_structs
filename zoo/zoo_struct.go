@@ -4,6 +4,12 @@ type Zoo struct {
 	Cages []*Cage
 }
 
+type AnimalToCageMapping struct {
+	Name        string
+	CageIndex   int
+	AnimalIndex int
+}
+
 type Cage struct {
 	Number  int
 	Animals []Animal

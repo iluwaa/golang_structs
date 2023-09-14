@@ -12,7 +12,8 @@ type Payload struct {
 }
 
 func ShowPayload() {
-	marshalled, _ := json.MarshalIndent(Payload{1, true, "10.09.23"}, "", " ")
+	marshalled, test := json.MarshalIndent(Payload{1, true, "10.09.23"}, "", " ")
 
 	fmt.Printf("payload is: %s\n", marshalled)
+	fmt.Printf("payload is: %s\n", test)
 }

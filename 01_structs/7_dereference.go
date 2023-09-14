@@ -11,6 +11,7 @@ func Dereference() {
 	postPointer.User.Name = "John Pointer"
 
 	(*postPointer).User.Age = 22
+	postValue.User.Age = 23
 
 	fmt.Printf("postPointer: %+v, %T\n", postPointer, postPointer)
 	fmt.Printf("postValue: %+v, %T\n", postValue, postValue)
