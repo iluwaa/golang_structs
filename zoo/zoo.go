@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"slices"
 	"strings"
 	"time"
 )
@@ -47,7 +48,6 @@ func generateAnimalsList(count int) []string {
 
 	for i := 0; i < count; i++ {
 		slicedAnimalsList = append(slicedAnimalsList, completeAnimalsList[rand.Intn(len(completeAnimalsList))])
-		fmt.Println(slicedAnimalsList)
 	}
 
 	return slicedAnimalsList
@@ -93,6 +93,32 @@ func getAnimalsInfo(animal string) []Animal {
 	}
 
 	return result
+}
+
+func RandomAnimalsList(zoo *Zoo, count int) []AnimalToCageMapping {
+	var completeAnimalsList []AnimalToCageMapping
+	var slicedAnimalsList []AnimalToCageMapping
+
+	for i, cage := range zoo.Cages {
+		for k, animal := range cage.Animals {
+			tmp := new(AnimalToCageMapping)
+			tmp.Name = animal.Name
+			tmp.CageIndex = i
+			tmp.AnimalIndex = k
+
+			completeAnimalsList = append(completeAnimalsList, *tmp)
+		}
+	}
+
+	for len(slicedAnimalsList) < count {
+		randomIndex := rand.Intn(len(completeAnimalsList))
+		tmpAnimalMapping := completeAnimalsList[randomIndex]
+		if !slices.Contains(slicedAnimalsList, tmpAnimalMapping) {
+			slicedAnimalsList = append(slicedAnimalsList, tmpAnimalMapping)
+		}
+	}
+
+	return slicedAnimalsList
 }
 
 // Debug
